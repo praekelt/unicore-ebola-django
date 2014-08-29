@@ -29,14 +29,19 @@ urlpatterns = patterns(
         name='contact'
     ),
     url(
-        r'^about/hygiene/$',
-        TemplateView.as_view(template_name="unicef/hygiene.html"),
-        name='about_hygiene'
+        r'^about/the-facts/$',
+        TemplateView.as_view(template_name="unicef/the_facts.html"),
+        name='about_the_facts'
     ),
     url(
-        r'^about/diarrhoea/$',
-        TemplateView.as_view(template_name="unicef/diarrhoea.html"),
-        name='about_diarrhoea'
+        r'^about/treatment/$',
+        TemplateView.as_view(template_name="unicef/treatment.html"),
+        name='about_treatment'
+    ),
+    url(
+        r'^about/safe-burial-practices/$',
+        TemplateView.as_view(template_name="unicef/safe_burial_practices.html"),
+        name='about_safe_burial_practices'
     ),
     #url(r'^search/', cache_page(SearchView(results_per_page=5), 60 * 60), name='haystack_search'),
 )
