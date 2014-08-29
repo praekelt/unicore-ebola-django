@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% load jmbo_inclusion_tags %}
+
+{% block content %}
+    <div class="object-category-list modelbase-category-list">
+        <div class="h1">
+            <img src="{{ STATIC_URL }}img/icon-{{category.slug}}.jpg"> {{ category.title }}
+            <div class="clear"></div>
+        </div>
+
+        <div class="items">
+
+            {% if pinned_object_list %}
+            <div class="box">
+            {% for object in pinned_object_list %}
+                <div class="item">
+                    {% render_object object "pinned_list_item" %}
+                </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="box">
+            {% for object in object_list %}
+                <div class="item">
+                    {% render_object object "list_item" %}
+                </div>
+            {% endfor %}
+                <div class="pagi">
+                    {% if category.slug == 'diarrhoea' %}
+                    <a href="{% url 'about_diarrhoea' %}">Why it is important</a>
+                    {% endif %}
+                    {% if category.slug == 'hygiene' %}
+                    <a href="{% url 'about_hygiene' %}">Why it is important</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+        {% pager page_obj %}
+    </div>
+{% endblock %}
