@@ -12,24 +12,31 @@ class Migration(DataMigration):
         #Add Other Site
         from category.models import Category
 
-        if not Category.objects.filter(slug='hygiene').exists():
-            category = Category.objects.create(title='Hygiene',
-                                               slug='hygiene',
+        if not Category.objects.filter(slug='the-facts').exists():
+            category = Category.objects.create(title='The facts',
+                                               slug='the-facts',
                                                )
             category.sites.add(1)
-        if not Category.objects.filter(slug='diarrhoea').exists():
-            category = Category.objects.create(title='Diarrhoea',
-                                               slug='diarrhoea',
+        if not Category.objects.filter(slug='treatment').exists():
+            category = Category.objects.create(title='Treatment',
+                                               slug='treatment',
+                                               )
+            category.sites.add(1)
+        if not Category.objects.filter(slug='safe-burial-practices').exists():
+            category = Category.objects.create(title='Safe Burial Practices',
+                                               slug='safe-burial-practices',
                                                )
             category.sites.add(1)
 
     def backwards(self, orm):
         from category.models import Category
 
-        if Category.objects.filter(slug='hygiene').exists():
-            Category.objects.get(slug='hygiene').delete()
-        if Category.objects.filter(slug='diarrhoea').exists():
-            Category.objects.get(slug='diarrhoea').delete()
+        if Category.objects.filter(slug='the-facts').exists():
+            Category.objects.get(slug='the-facts').delete()
+        if Category.objects.filter(slug='treatment').exists():
+            Category.objects.get(slug='treatment').delete()
+        if Category.objects.filter(slug='safe-burial-practices').exists():
+            Category.objects.get(slug='safe-burial-practices').delete()
 
     models = {
     }
