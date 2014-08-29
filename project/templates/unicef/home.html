@@ -8,12 +8,17 @@
 {% block content %}
     <div id="content">
         <div class="h1">
-            <a href="{% url 'category_object_list' 'diarrhoea' %}"><img src="{{ STATIC_URL }}img/icon-diarrhoea.jpg"> Diarrhoea</a>
+            <a href="{% url 'category_object_list' 'the-facts' %}"><img src="{{ STATIC_URL }}img/icon-diarrhoea.jpg"> The Facts</a>
             <div class="clear"></div>
         </div>
 
         <div class="h1">
-            <a href="{% url 'category_object_list' 'hygiene' %}"><img src="{{ STATIC_URL }}img/icon-hygiene.jpg"> Hygiene</a>
+            <a href="{% url 'category_object_list' 'treatment' %}"><img src="{{ STATIC_URL }}img/icon-hygiene.jpg"> Treatment</a>
+            <div class="clear"></div>
+        </div>
+
+        <div class="h1">
+            <a href="{% url 'category_object_list' 'safe-burial-practices' %}"><img src="{{ STATIC_URL }}img/icon-hygiene.jpg"> Safe Burial practices</a>
             <div class="clear"></div>
         </div>
 
