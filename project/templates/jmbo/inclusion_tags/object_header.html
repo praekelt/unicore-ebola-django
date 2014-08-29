@@ -1,6 +1,7 @@
+{% load url from future %}
 {% load likes_inclusion_tags i18n %}
 
-<div class="h2">{{ object.primary_category.title }}</div>
+<div class="h2"><a href="{% url 'category_object_list' object.primary_category.slug %}">{{ object.primary_category.title }}</a></div>
 <div class="object-header">
     <div class="intro">{{ object.description }}</div>
 

@@ -37,6 +37,7 @@
 		#content .h1 img { float: left; padding: 0 10px 0 0; }
 		#content .h1 a { padding: 0 10px; display: block; color: #91a893; }
 		#content .h2 { padding: 10px; background: #f6f4e3; font-weight: bold; color: #91a893; }
+			#content .h2 a {color: #91a893;}
 		#content .box { padding: 10px; }
 			#content .box .item { padding: 0 0 10px 0; margin: 0 0 10px 0; }
 			#content .box .item:last-child { padding: 0; margin: 0; border: 0; }
