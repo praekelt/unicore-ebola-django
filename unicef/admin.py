@@ -4,7 +4,7 @@ from django.contrib.admin.sites import NotRegistered
 from post.models import Post
 from jmbo.admin import ModelBaseAdmin
 
-from unicef.models import HygienePost, DiarrhoeaPost
+from unicef.models import TheFactsPost, TreatmentPost, SafeBurialPracticesPost
 
 
 class PostAdmin(ModelBaseAdmin):
@@ -45,5 +45,6 @@ except NotRegistered:
     pass
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(HygienePost, UnicefPostAdmin)
-admin.site.register(DiarrhoeaPost, UnicefPostAdmin)
+admin.site.register(TheFactsPost, UnicefPostAdmin)
+admin.site.register(TreatmentPost, UnicefPostAdmin)
+admin.site.register(SafeBurialPracticesPost, UnicefPostAdmin)

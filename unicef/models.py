@@ -2,9 +2,7 @@ from post.models import Post
 from category.models import Category
 
 
-class HygienePost(Post):
-    primary_category_slug = 'hygiene'
-
+class UnicefPost(Post):
     class Meta:
         app_label = 'post'
         proxy = True
@@ -13,18 +11,16 @@ class HygienePost(Post):
         if not self.primary_category:
             self.primary_category = Category.objects.get(
                 slug=self.primary_category_slug)
-        super(HygienePost, self).save(*args, **kwargs)
+        super(UnicefPost, self).save(*args, **kwargs)
 
 
-class DiarrhoeaPost(Post):
-    primary_category_slug = 'diarrhoea'
+class TheFactsPost(UnicefPost):
+    primary_category_slug = 'the-facts'
 
-    class Meta:
-        app_label = 'post'
-        proxy = True
 
-    def save(self, *args, **kwargs):
-        if not self.primary_category:
-            self.primary_category = Category.objects.get(
-                slug=self.primary_category_slug)
-        super(DiarrhoeaPost, self).save(*args, **kwargs)
+class TreatmentPost(UnicefPost):
+    primary_category_slug = 'treatment'
+
+
+class SafeBurialPracticesPost(UnicefPost):
+    primary_category_slug = 'safe-burial-practices'
