@@ -7,20 +7,12 @@
 
 {% block content %}
     <div id="content">
+        {% for cat in categories %}
         <div class="h1">
-            <a href="{% url 'category_object_list' 'the-facts' %}"> The Facts</a>
+            <a href="{% url 'category_object_list' cat.slug %}"> {{cat.title}}</a>
             <div class="clear"></div>
         </div>
-
-        <div class="h1">
-            <a href="{% url 'category_object_list' 'treatment' %}"> Treatment</a>
-            <div class="clear"></div>
-        </div>
-
-        <div class="h1">
-            <a href="{% url 'category_object_list' 'safe-burial-practices' %}"> Safe Burial practices</a>
-            <div class="clear"></div>
-        </div>
+        {% endfor %}
 
         <div class="detail">
             <p><strong>Facts for Life saves lives!</strong></p>
