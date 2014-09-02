@@ -4,8 +4,6 @@ from django.contrib.admin.sites import NotRegistered
 from post.models import Post
 from jmbo.admin import ModelBaseAdmin
 
-from unicef.models import TheFactsPost, TreatmentPost, SafeBurialPracticesPost
-
 
 class PostAdmin(ModelBaseAdmin):
     raw_id_fields = ('owner', )
@@ -31,20 +29,9 @@ class PostAdmin(ModelBaseAdmin):
     _view_comments.allow_tags = True
 
 
-class UnicefPostAdmin(PostAdmin):
-
-    def queryset(self, request):
-        qs = super(UnicefPostAdmin, self).queryset(request)
-        return qs.filter(
-            primary_category__slug=self.model.primary_category_slug)
-
-
 try:
     admin.site.unregister(Post)
 except NotRegistered:
     pass
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(TheFactsPost, UnicefPostAdmin)
-admin.site.register(TreatmentPost, UnicefPostAdmin)
-admin.site.register(SafeBurialPracticesPost, UnicefPostAdmin)
