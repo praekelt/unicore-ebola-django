@@ -39,6 +39,12 @@ urlpatterns = patterns(
         TemplateView.as_view(template_name="unicef/safe_burial_practices.html"),
         name='about_safe_burial_practices'
     ),
+    url(
+        r'^content/(?P<category_slug>[\w-]+)/list/$',
+        'unicef.views.ebola_category_object_list',
+        {},
+        name='category_object_list'
+    ),
     #url(r'^search/', cache_page(SearchView(results_per_page=5), 60 * 60), name='haystack_search'),
 )
 
