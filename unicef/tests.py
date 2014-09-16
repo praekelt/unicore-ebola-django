@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
+from post.models import Post
 
 import string
 
@@ -36,3 +37,29 @@ class OrderingTest(TestCase):
         client = Client()
         response = client.get(reverse('home'))
         self.assertBefore(response, '10. title q', '2. title y')
+
+    @override_settings(PATCH_CATEGORY_ORDERING=True)
+    def test_category_link_for_1_post(self):
+        p = Post.objects.create(
+            title='only 1 post',
+            content='sample content')
+        p.primary_category = Category.objects.all()[0]
+        p.save()
+        p = Post.objects.create(
+            title='sample title for multiple',
+            content='sample content')
+        p.primary_category = Category.objects.all()[1]
+        p.save()
+        p = Post.objects.create(
+            title='sample title for multiple 2',
+            content='sample content')
+        p.primary_category = Category.objects.all()[1]
+        p.save()
+
+        client = Client()
+        response = client.get(reverse('home'))
+
+        # the homepage will show a link directly to this post
+        self.assertContains(response, 'only-1-post')
+        self.assertNotContains(response, 'sample-title-for-multiple')
+        self.assertNotContains(response, 'sample-title-for-multiple-2')
