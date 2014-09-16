@@ -29,7 +29,7 @@ class OrderingTest(TestCase):
         """
         client = Client()
         response = client.get(reverse('home'))
-        self.assertBefore(response, '1. title z', '10. title q')
+        self.assertBefore(response, '2. title y', '10. title q')
 
     @override_settings(PATCH_CATEGORY_ORDERING=False)
     def test_order_default(self):
