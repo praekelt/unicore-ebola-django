@@ -238,6 +238,8 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+PATCH_CATEGORY_ORDERING = True
+
 try:
     from local_settings import *
 except ImportError:

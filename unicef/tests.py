@@ -1,16 +1,38 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+from category.models import Category
 
-Replace this with more appropriate tests for your application.
-"""
-
+from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.test.client import Client
+from django.test.utils import override_settings
+
+import string
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class OrderingTest(TestCase):
+
+    def setUp(self):
+        for letter, index in zip(string.ascii_lowercase, range(26, 0, -1)):
+            Category.objects.create(title='%d. title %s' % (index, letter,),
+                                    slug='%d-slug-%s' % (index, letter,))
+
+    def assertBefore(self, response, a, b):
+        self.assertContains(response, a)
+        self.assertContains(response, b)
+        self.assertTrue(
+            response.content.index(a) < response.content.index(b),
+            'a does not come before b.')
+
+    @override_settings(PATCH_CATEGORY_ORDERING=True)
+    def test_order_patching(self):
         """
-        Tests that 1 + 1 always equals 2.
+        patching query to order on digits in title
         """
-        self.assertEqual(1 + 1, 2)
+        client = Client()
+        response = client.get(reverse('home'))
+        self.assertBefore(response, '2. title y', '10. title q')
+
+    @override_settings(PATCH_CATEGORY_ORDERING=False)
+    def test_order_default(self):
+        client = Client()
+        response = client.get(reverse('home'))
+        self.assertBefore(response, '10. title q', '2. title y')
