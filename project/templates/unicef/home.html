@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load url from future %}
+{% load jmbo_inclusion_tags %}
 
 {% block above_content %}
 <div id="banner"><img src="{{ STATIC_URL }}img/header.jpg"></div>
@@ -9,7 +10,11 @@
     <div id="content">
         {% for cat in categories %}
         <div class="h1">
-            <a href="{% url 'category_object_list' cat.slug %}"> {{cat.title}}</a>
+            {% if cat.primary_modelbase_set.all.count == 1 %}
+                <a href="{{ cat.primary_modelbase_set.all.0.get_absolute_url }}"> {{cat.title}}</a>
+            {% else %}
+                <a href="{% url 'category_object_list' cat.slug %}"> {{cat.title}}</a>
+            {% endif %}
             <div class="clear"></div>
         </div>
         {% endfor %}
