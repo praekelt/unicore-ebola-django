@@ -2,8 +2,7 @@ language: python
 python:
   - "2.7"
 install:
+  - "curl https://raw.githubusercontent.com/praekelt/unicore-cms/develop/utils/install_libgit2.sh | sh"
   - "pip install -r requirements.pip --use-wheel"
 script:
-  - python manage.py syncdb --noinput
-  - python manage.py migrate
-  - python manage.py test
+  - LIBGIT2=$VIRTUAL_ENV coverage run --source=unicef manage.py test
