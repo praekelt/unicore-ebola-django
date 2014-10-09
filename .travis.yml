@@ -3,6 +3,7 @@ python:
   - "2.7"
 install:
   - "curl https://raw.githubusercontent.com/praekelt/unicore-cms/develop/utils/install_libgit2.sh | sh"
+  - "pip install coveralls coverage --use-wheel"
   - "pip install -r requirements.pip --use-wheel"
 script:
   - LIBGIT2=$VIRTUAL_ENV coverage run --source=unicef manage.py test
